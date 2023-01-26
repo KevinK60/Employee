@@ -1,3 +1,4 @@
+import java.math.BigDecimal
 import java.math.RoundingMode
 import java.text.DecimalFormat
 
@@ -12,7 +13,7 @@ fun main(args: Array<String>) {
 
 fun printPaySlip() {
     val df = DecimalFormat("#.##")
-
+    val decimal = BigDecimal(3.14159265359).setScale(2, RoundingMode.HALF_EVEN)
     df.roundingMode = RoundingMode.CEILING
         val firstName = "Joe"
         val Surname = "Soap"
@@ -44,12 +45,12 @@ fun printPaySlip() {
         println("--------------------------------------------------------------------------------")
         println("------- PAYMENT DETAILS ---------------------DEDUCTION DETAILS------------------")
         println()
-        println("-  Salary: " + df.format(grossSalary / 12) + "                     PAYE: ${df.format(culculatePaye())}      -")
+        println("-  Salary: " + BigDecimal(grossSalary / 12).setScale(2,RoundingMode.HALF_EVEN) + "                     PAYE: ${df.format(culculatePaye())}      -")
 
-        println("-  Bonus: " + df.format(annualBonus / 12) + "                           PRSI: ${df.format(culculateprsi())}           -")
+        println("-  Bonus: " + BigDecimal(annualBonus / 12).setScale(2,RoundingMode.HALF_EVEN) + "                           PRSI: ${df.format(culculateprsi())}           -")
         println("-                                       Cycle to work: $cycleToWorkScheme            -")
         println("-----------------------------------------------------------------------------------")
-        println(" Gross pay: " + df.format(grosssalary()) + "                 total reductions " + df.format(totalreduction()))
+        println(" Gross pay: " + BigDecimal(grosssalary()).setScale(2,RoundingMode.HALF_EVEN) + "                 total reductions " + df.format(totalreduction()))
            println("-----------------------------------------------------------------------------")
                               println("                       Net pay: " + df.format(grosssalary() - totalreduction()))
     println("--------------------------------------------------------------------------------")
