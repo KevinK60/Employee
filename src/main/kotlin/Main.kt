@@ -45,14 +45,14 @@ fun printPaySlip() {
         println("--------------------------------------------------------------------------------")
         println("------- PAYMENT DETAILS ---------------------DEDUCTION DETAILS------------------")
         println()
-        println("-  Salary: " + BigDecimal(grossSalary / 12).setScale(2,RoundingMode.HALF_EVEN) + "                     PAYE: ${df.format(culculatePaye())}      -")
+        println("-  Salary: " + BigDecimal(grossSalary / 12).setScale(2,RoundingMode.HALF_EVEN) + "                     PAYE: ${BigDecimal(culculatePaye()).setScale(2,RoundingMode.HALF_EVEN)}      -")
 
-        println("-  Bonus: " + BigDecimal(annualBonus / 12).setScale(2,RoundingMode.HALF_EVEN) + "                           PRSI: ${df.format(culculateprsi())}           -")
+        println("-  Bonus: " + BigDecimal(annualBonus / 12).setScale(2,RoundingMode.HALF_EVEN) + "                           PRSI: ${BigDecimal(culculateprsi()).setScale(2,RoundingMode.HALF_EVEN)}           -")
         println("-                                       Cycle to work: $cycleToWorkScheme            -")
         println("-----------------------------------------------------------------------------------")
-        println(" Gross pay: " + BigDecimal(grosssalary()).setScale(2,RoundingMode.HALF_EVEN) + "                 total reductions " + df.format(totalreduction()))
+        println(" Gross pay: " + BigDecimal(grosssalary()).setScale(2,RoundingMode.HALF_EVEN) + "                 total reductions " + BigDecimal(totalreduction()).setScale(2,RoundingMode.HALF_EVEN))
            println("-----------------------------------------------------------------------------")
-                              println("                       Net pay: " + df.format(grosssalary() - totalreduction()))
+                              println("                       Net pay: " + BigDecimal(grosssalary() - totalreduction()).setScale(2,RoundingMode.HALF_EVEN))
     println("--------------------------------------------------------------------------------")
 
 }
