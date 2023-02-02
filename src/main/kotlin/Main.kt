@@ -1,7 +1,22 @@
+
 import java.math.BigDecimal
 import java.math.RoundingMode
-import java.text.DecimalFormat
 
+
+import kotlin.math.round
+
+val decimal = BigDecimal(3.14159265359).setScale(2, RoundingMode.HALF_EVEN)
+val firstName = "Joe"
+val Surname = "Soap"
+val gender: Char = 'm'
+val employeeId = 6143
+val grossSalary = 67543.21
+val payePercentage = 38.5
+val prsiPercentage = 5.2
+val annualBonus = 1450.50
+val cycleToWorkScheme = 54.33
+
+fun roundTwoDecimals(number: Double) = round(number * 100) / 100
 fun main(args: Array<String>){
 
     var input : Int
@@ -37,43 +52,22 @@ fun menu() : Int {
          Enter Option : """)
     return readLine()!!.toInt()
 }
-val df = DecimalFormat("#.##")
-val decimal = BigDecimal(3.14159265359).setScale(2, RoundingMode.HALF_EVEN)
-val firstName = "Joe"
-val Surname = "Soap"
-val gender = "m"
-val employeeId = 6143
-val grossSalary = 67543.21
-val payePercentage = 38.5
-val prsiPercentage = 5.2
-val annualBonus = 1450.50
-val cycleToWorkScheme = 54.33
 
-fun getFullName() = "$firstName $Surname"
-
-fun getMonthlySalary(): Double {
-    return grossSalary / 12
+fun getFullName() = when (employee.gender){
+    'm', 'M' -> "Mr. ${employee.firstName} ${employee.surname}"
+    'f', 'F' -> "Ms.  ${employee.firstName} ${employee.surname}"
+    else ->  "${employee.firstName} ${employee.surname}"
 }
 
-fun getMonthlyPAYE(): Double {
-    return (grossSalary / 12 * payePercentage / 100)
-}
 
-fun getMonthlyPRSI(): Double {
-    return grossSalary / 12 * prsiPercentage / 100
-}
-fun getGrossMonthlyPay(): Double{
-    return getMonthlySalary() + (annualBonus / 12)
-}
-fun getTotalMonthlyDeductions(): Double {
-    return getMonthlyPAYE() + getMonthlyPRSI() + cycleToWorkScheme
-}
-fun getNetMonthlyPay(): Double{
-    return getMonthlySalary() - getTotalMonthlyDeductions()
-}
-fun grosssalary(): Double {
-    return (grossSalary / 12) + (annualBonus / 12)
-}
+fun getMonthlySalary() = roundTwoDecimals(grossSalary / 12)
+
+fun getMonthlyPRSI() = roundTwoDecimals(getMonthlySalary() * (prsiPercentage / 100))
+fun getMonthlyPAYE() = roundTwoDecimals(getMonthlySalary() * (payePercentage / 100))
+
+fun getGrossMonthlyPay() = roundTwoDecimals(getMonthlySalary() + (annualBonus / 12))
+fun getTotalMonthlyDeductions() = roundTwoDecimals((getMonthlyPRSI() + getMonthlyPAYE() + cycleToWorkScheme))
+fun getNetMonthlyPay() = roundTwoDecimals(roundTwoDecimals(getGrossMonthlyPay() - getTotalMonthlyDeductions()))
  fun getPayslip() = """
   --------------------------------------------------------------------------------
   -                                                                              -
@@ -83,13 +77,13 @@ fun grosssalary(): Double {
   -                                                                              -
   -------- PAYMENT DETAILS ---------------------DEDUCTION DETAILS-----------------
   -                                                                              -
-  -  Salary:${BigDecimal(grossSalary / 12).setScale(2,RoundingMode.HALF_EVEN)}                      PAYE: ${BigDecimal(getMonthlyPAYE()).setScale(2,RoundingMode.HALF_EVEN)}      -")
+  -  Salary:${getMonthlySalary()}                      PAYE: ${getMonthlyPAYE()}      -")
   -                                                                              -
-  -  Bonus: ${BigDecimal(annualBonus / 12).setScale(2,RoundingMode.HALF_EVEN)}                      PRSI: ${BigDecimal(getMonthlyPRSI()).setScale(2,RoundingMode.HALF_EVEN)}           -")
+  -  Bonus: ${annualBonus}                      PRSI: ${ getMonthlyPRSI() }           -")
   -                                    Cycle to work: $cycleToWorkScheme          -
   ---------------------------------------------------------------------------------
-  - Gross pay:  ${BigDecimal(grosssalary()).setScale(2,RoundingMode.HALF_EVEN)}                         total reductions  ${BigDecimal(getTotalMonthlyDeductions()).setScale(2,RoundingMode.HALF_EVEN)}
+  - Gross pay:  ${getMonthlySalary()}                         total reductions  ${getTotalMonthlyDeductions()}
   ---------------------------------------------------------------------------------
-                                      Net pay:  ${BigDecimal(grosssalary() - getTotalMonthlyDeductions()).setScale(2,RoundingMode.HALF_EVEN)}
+                                      Net pay:  ${getNetMonthlyPay()}
   ---------------------------------------------------------------------------------")
 """
