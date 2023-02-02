@@ -15,6 +15,7 @@ val payePercentage = 38.5
 val prsiPercentage = 5.2
 val annualBonus = 1450.50
 val cycleToWorkScheme = 54.33
+var employee =  Employee("Joe", "Soap", 'm', 6143, 67543.21, 38.5, 5.2, 1450.50, 54.33)
 
 fun roundTwoDecimals(number: Double) = round(number * 100) / 100
 fun main(args: Array<String>){
