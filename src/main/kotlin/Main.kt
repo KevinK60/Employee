@@ -55,6 +55,6 @@ fun grosssalary(): Double {
   ---------------------------------------------------------------------------------
   - Gross pay:  ${BigDecimal(grosssalary()).setScale(2,RoundingMode.HALF_EVEN)}                         total reductions  ${BigDecimal(totalreduction()).setScale(2,RoundingMode.HALF_EVEN)}
   ---------------------------------------------------------------------------------
-                                      Net pay: " + ${BigDecimal(grosssalary() - totalreduction()).setScale(2,RoundingMode.HALF_EVEN)}
+                                      Net pay:  ${BigDecimal(grosssalary() - totalreduction()).setScale(2,RoundingMode.HALF_EVEN)}
   ---------------------------------------------------------------------------------")
 """
