@@ -1,3 +1,4 @@
+package Employee
 
 import java.math.BigDecimal
 import java.math.RoundingMode
@@ -32,6 +33,7 @@ fun main(args: Array<String>){
             5 -> println("Monthly Total Deductions: ${getTotalMonthlyDeductions()}")
             6 -> println("Monthly Net Pay: ${getNetMonthlyPay()}")
             7 -> println(getPayslip())
+            8 -> println(add())
             -1 -> println("Exiting App")
             else -> println("Invalid Option")
         }
@@ -49,7 +51,9 @@ fun menu() : Int {
            5. Monthly Total Deductions
            6. Monthly Net Pay
            7. Full Payslip
+           8. add Employee
           -1. Exit
+          
          Enter Option : """)
     return readLine()!!.toInt()
 }
@@ -88,3 +92,26 @@ fun getNetMonthlyPay() = roundTwoDecimals(roundTwoDecimals(getGrossMonthlyPay() 
                                       Net pay:  ${getNetMonthlyPay()}
   ---------------------------------------------------------------------------------")
 """
+
+fun add(){
+    print("Enter first name: ")
+    val firstName = readLine().toString()
+    print("Enter surname: ")
+    val surname = readLine().toString()
+    print("Enter gender (m/f): ")
+    val gender = readLine()!!.toCharArray()[0]
+    print("Enter employee ID: ")
+    val employeeID = readLine()!!.toInt()
+    print("Enter gross salary: ")
+    val grossSalary = readLine()!!.toDouble()
+    print("Enter PAYE %: ")
+    val payePercentage = readLine()!!.toDouble()
+    print("Enter PRSI %: ")
+    val prsiPercentage = readLine()!!.toDouble()
+    print("Enter Annual Bonus: ")
+    val annualBonus= readLine()!!.toDouble()
+    print("Enter Cycle to Work Deduction: ")
+    val cycleToWorkMonthlyDeduction= readLine()!!.toDouble()
+
+    employee = Employee(firstName, surname, gender, employeeID, grossSalary, payePercentage, prsiPercentage, annualBonus, cycleToWorkMonthlyDeduction)
+}
