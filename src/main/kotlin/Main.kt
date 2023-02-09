@@ -1,12 +1,13 @@
 package Employee
-package EmployeeApi
 import java.math.BigDecimal
 import java.math.RoundingMode
+
 
 
 import kotlin.math.round
 
 val decimal = BigDecimal(3.14159265359).setScale(2, RoundingMode.HALF_EVEN)
+var employees = EmployeeAPI()
 val firstName = "Joe"
 val Surname = "Soap"
 val gender: Char = 'm'
@@ -17,11 +18,11 @@ val prsiPercentage = 5.2
 val annualBonus = 1450.50
 val cycleToWorkScheme = 54.33
 var employee =  Employee("Joe", "Soap", 'm', 6143, 67543.21, 38.5, 5.2, 1450.50, 54.33)
-
 fun roundTwoDecimals(number: Double) = round(number * 100) / 100
-fun main(args: Array<String>){
-
-    var input : Int
+fun main(args: Array<String>) {
+    start()
+}
+ /*   var input : Int
 
     do {
         input = menu()
@@ -39,25 +40,22 @@ fun main(args: Array<String>){
         }
         println()
     } while (input != -1)
-}
+}*/
 
 fun menu() : Int {
-    print("""
-         Employee Menu for ${getFullName()}
-           1. Monthly Salary
-           2. Monthly PRSI
-           3. Monthly PAYE
-           4. Monthly Gross Pay
-           5. Monthly Total Deductions
-           6. Monthly Net Pay
-           7. Full Payslip
-           8. add Employee
-          -1. Exit
-          
-         Enter Option : """)
+    print(
+        """ 
+         |Employee Menu
+         |   1. Add Employee
+         |   2. List All Employees
+         |   3. Search Employees 
+         |   4. Print Payslip for Employee
+         |  -1. Exit
+         |       
+         |Enter Option : """.trimMargin()
+    )
     return readLine()!!.toInt()
 }
-
 fun getFullName() = when (employee.gender){
     'm', 'M' -> "Mr. ${employee.firstName} ${employee.surname}"
     'f', 'F' -> "Ms.  ${employee.firstName} ${employee.surname}"
@@ -92,6 +90,45 @@ fun getNetMonthlyPay() = roundTwoDecimals(roundTwoDecimals(getGrossMonthlyPay() 
                                       Net pay:  ${getNetMonthlyPay()}
   ---------------------------------------------------------------------------------")
 """
+
+
+fun start() {
+    var input: Int
+
+    do {
+        input = menu()
+        when (input) {
+            1 -> add()
+            2 -> list()
+            3 -> search()
+            4 -> getPayslip()
+            -99 -> dummyData()
+            -1 -> println("Exiting App")
+            else -> println("Invalid Option")
+        }
+        println()
+    } while (input != -1)
+}
+fun dummyData() {
+    employees.create(Employee("Joe", "Soap", 'm', 0, 35655.43, 31.0, 7.5, 2000.0, 25.6))
+    employees.create(Employee("Joan", "Murphy", 'f', 0, 54255.13, 32.5, 7.0, 1500.0, 55.3))
+    employees.create(Employee("Mary", "Quinn", 'f', 0, 75685.41, 40.0, 8.5, 4500.0, 0.0))
+}
+fun list(){
+    println(employees.findAll())
+}
+fun search() {
+    val employee = getEmployeeById()
+    if (employee == null)
+        println("No employee found")
+    else
+        println(employee)
+}
+internal fun getEmployeeById(): Employee? {
+    print("Enter the employee id to search by: ")
+    val employeeID = readLine()!!.toInt()
+    return employees.findOne(employeeID)
+}
 
 fun add(){
     print("Enter first name: ")
