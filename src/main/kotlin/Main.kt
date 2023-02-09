@@ -1,7 +1,10 @@
 package Employee
+import mu.KotlinLogging
 import java.math.BigDecimal
 import java.math.RoundingMode
 import kotlin.math.E
+val logger = KotlinLogging.logger {}
+logger.info { "Launching Employee App"}
 
 
 import kotlin.math.round
