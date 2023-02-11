@@ -50,8 +50,12 @@ class Employee(
     }
 
     override fun toString(): String {
-        return "Employee(firstName='$firstName', surname='$surname', gender=$gender, employeeID=$employeeID, grossSalary=$grossSalary, payePercentage=$payePercentage, prsiPercentage=$prsiPercentage, annualBonus=$annualBonus, cycleToWorkMonthlyDeduction=$cycleToWorkMonthlyDeduction)"
+        return """Employee ID: $employeeID
+                  ${firstName}
+                  $surname 
+                  Gender ${gender.uppercaseChar()}
+                  Gross salary $grossSalary"""
+
     }
 
 }
-

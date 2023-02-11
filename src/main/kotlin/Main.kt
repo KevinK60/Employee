@@ -13,6 +13,7 @@ fun roundTwoDecimals(number: Double) = round(number * 100) / 100
 fun main(args: Array<String>) {
     logger.info { "Launching Employee App" }
     start()
+    dummyData()
 }
 
 fun menu() : Int {
@@ -23,6 +24,8 @@ fun menu() : Int {
          |   2. List All Employees
          |   3. Search Employees 
          |   4. Print Payslip for Employee
+         |   5. Delete
+         |   6. Select Employee
          |  -1. Exit
          |       
          |Enter Option : """.trimMargin()
@@ -43,6 +46,8 @@ fun start() {
             2 -> list()
             3 -> search()
             4 -> paySlip()
+            5 -> delete()
+            6 -> listAll()
             -99 -> dummyData()
             -1 -> println("Exiting App")
             else -> println("Invalid Option")
@@ -59,6 +64,24 @@ fun list(){
     employees.findAll()
         .forEach{ println(it.toString()) }
 }
+fun listAll() {
+    employees.findAll()
+        .forEach { println("${it.firstName} ${it.surname} ID: ${it.employeeID}") }
+    print("Enter the employee ID you wish to select: ")
+    val employeeID = readLine()!!.toInt()
+    employees.findOne(employeeID)
+        .let { println("${it?.firstName}  ${it?.surname}") }
+
+}
+
+
+
+fun delete()
+{
+    val employee = getEmployeeById()
+    if (employee != null)
+        employees.delete(employee)
+}
 fun search() {
     val employee = getEmployeeById()
     if (employee == null)
@@ -67,11 +90,11 @@ fun search() {
         println(employee)
 }
 internal fun getEmployeeById(): Employee? {
-    print("Enter the employee id to search by: ")
+    print("Enter the employee id ")
     val employeeID = readLine()!!.toInt()
     return employees.findOne(employeeID)
 }
-fun paySlip(){
+fun paySlip() {
     val employee = getEmployeeById()
     if (employee != null)
         println(employee.getPayslip())
