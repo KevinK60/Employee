@@ -38,10 +38,10 @@ class Employee(
   -                                                                              -
   -------- PAYMENT DETAILS ---------------------DEDUCTION DETAILS-----------------
   -                                                                              -
-  -  Salary:${getMonthlySalary()}                      PAYE: ${getMonthlyPAYE()}      -")
+  -  Salary:${getMonthlySalary()}                      PAYE: ${getMonthlyPAYE()} -
   -                                                                              -
-  -  Bonus: ${annualBonus}                      PRSI: ${getMonthlyPRSI()}           -")
-  -                                    Cycle to work: $cycleToWorkMonthlyDeduction          -
+  -  Bonus: ${annualBonus}                      PRSI: ${getMonthlyPRSI()}         -
+  -                                    Cycle to work: $cycleToWorkMonthlyDeduction -
   ---------------------------------------------------------------------------------
   - Gross pay:  ${getMonthlySalary()}                         total reductions  ${getTotalMonthlyDeductions()}
   ---------------------------------------------------------------------------------

@@ -25,7 +25,7 @@ fun menu() : Int {
          |   3. Search Employees 
          |   4. Print Payslip for Employee
          |   5. Delete
-         |   6. Select Employee
+         |   6. List all employee information
          |  -1. Exit
          |       
          |Enter Option : """.trimMargin()
@@ -47,7 +47,7 @@ fun start() {
             3 -> search()
             4 -> paySlip()
             5 -> delete()
-            6 -> listAll()
+            6 -> listAllinfo()
             -99 -> dummyData()
             -1 -> println("Exiting App")
             else -> println("Invalid Option")
@@ -64,17 +64,38 @@ fun list(){
     employees.findAll()
         .forEach{ println(it.toString()) }
 }
-fun listAll() {
-    employees.findAll()
-        .forEach { println("${it.firstName} ${it.surname} ID: ${it.employeeID}") }
+fun listAllinfo() {
+    if (employees.findAll().isNotEmpty()) {
+        employees.findAll()
+            .forEach { println("${it.getFullName()} ID: ${it.employeeID}") }
+
+
     print("Enter the employee ID you wish to select: ")
     val employeeID = readLine()!!.toInt()
+    println()
     employees.findOne(employeeID)
-        .let { println("${it?.firstName}  ${it?.surname}") }
+        .let {
+            println(
+                """${it?.firstName}  ${it?.surname}
+            |Gross Salary: ${it?.grossSalary}
+            |Annual Bonus: ${it?.annualBonus}
+            |Cycle to Work Deduction: ${it?.cycleToWorkMonthlyDeduction}
+            |Total Salary: ${it?.getMonthlySalary()}
+            |Total Deductions: ${it?.getTotalMonthlyDeductions()}
+            |Net Salary: ${it?.getNetMonthlyPay()}
+            |employeeID: ${it?.employeeID}
+            |
+            |""".trimMargin()
+            )
+
+        }
 
 }
+else {
+    println("No employees found")
+}
 
-
+}
 
 fun delete()
 {
