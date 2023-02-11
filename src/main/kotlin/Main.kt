@@ -51,6 +51,7 @@ fun start() {
             4 -> paySlip()
             5 -> delete()
             6 -> listAllinfo()
+            7 -> listbySalary()
             -99 -> dummyData()
             -1 -> println("Exiting App")
             else -> println("Invalid Option")
@@ -63,6 +64,29 @@ fun dummyData() {
     employees.create(Employee("Joan", "Murphy", 'f', 0, 54255.13, 32.5, 7.0, 1500.0, 55.3))
     employees.create(Employee("Mary", "Quinn", 'f', 0, 75685.41, 40.0, 8.5, 4500.0, 0.0))
 }
+
+fun listbySalary() {
+    print("Enter y/n to sort by highest: ")
+val sort = readLine()!!.toString()
+    if (sort == "y" || sort == "Y")
+        if (employees.findAll().isNotEmpty())
+        employees.findAll()
+            .sortedByDescending { it.grossSalary }
+            .forEach { println(it.toString()) }
+    else {
+        println("No employees found")
+    }
+    else
+    {
+        employees.findAll()
+            .sortedBy {  it.grossSalary }
+            .forEach { println(it.toString()) }
+
+
+    }
+}
+
+
 fun list(){
     employees.findAll()
         .forEach{ println(it.toString()) }
