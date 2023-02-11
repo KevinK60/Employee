@@ -1,4 +1,6 @@
-package Employee
+package Employee.models
+import Employee.roundTwoDecimals
+
 class Employee(
     var firstName: String,
     var surname: String,
@@ -11,10 +13,10 @@ class Employee(
     var cycleToWorkMonthlyDeduction: Double
 
 ) {
-    fun getFullName() = when (employee.gender) {
-        'm', 'M' -> "Mr. ${employee.firstName} ${employee.surname}"
-        'f', 'F' -> "Ms.  ${employee.firstName} ${employee.surname}"
-        else -> "${employee.firstName} ${employee.surname}"
+    fun getFullName() = when (gender) {
+        'm', 'M' -> "Mr. ${firstName} ${surname}"
+        'f', 'F' -> "Ms.  ${firstName} ${surname}"
+        else -> "${firstName} ${surname}"
     }
 
     fun getMonthlySalary() = roundTwoDecimals(grossSalary / 12)
@@ -23,7 +25,7 @@ class Employee(
     fun getMonthlyPAYE() = roundTwoDecimals(getMonthlySalary() * (payePercentage / 100))
 
     fun getGrossMonthlyPay() = roundTwoDecimals(getMonthlySalary() + (annualBonus / 12))
-    fun getTotalMonthlyDeductions() = roundTwoDecimals((getMonthlyPRSI() + getMonthlyPAYE() + cycleToWorkScheme))
+    fun getTotalMonthlyDeductions() = roundTwoDecimals((getMonthlyPRSI() + getMonthlyPAYE() + cycleToWorkMonthlyDeduction))
     fun getNetMonthlyPay() = roundTwoDecimals(roundTwoDecimals(getGrossMonthlyPay() - getTotalMonthlyDeductions()))
     fun getPayslip() {
 
@@ -32,14 +34,14 @@ class Employee(
   -                                                                              -
   -                                Monthly Payslip                               -
   --------------------------------------------------------------------------------
-  - Employee Name: ${getFullName()}                Employee ID: $employeeId                               
+  - Employee Name: ${getFullName()}                Employee ID: $employeeID                               
   -                                                                              -
   -------- PAYMENT DETAILS ---------------------DEDUCTION DETAILS-----------------
   -                                                                              -
   -  Salary:${getMonthlySalary()}                      PAYE: ${getMonthlyPAYE()}      -")
   -                                                                              -
   -  Bonus: ${annualBonus}                      PRSI: ${getMonthlyPRSI()}           -")
-  -                                    Cycle to work: $cycleToWorkScheme          -
+  -                                    Cycle to work: $cycleToWorkMonthlyDeduction          -
   ---------------------------------------------------------------------------------
   - Gross pay:  ${getMonthlySalary()}                         total reductions  ${getTotalMonthlyDeductions()}
   ---------------------------------------------------------------------------------

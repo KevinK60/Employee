@@ -1,28 +1,17 @@
 package Employee
+import Employee.models.Employee
+import controllers.EmployeeAPI
 import mu.KotlinLogging
-import java.math.BigDecimal
-import java.math.RoundingMode
-import kotlin.math.E
-val logger = KotlinLogging.logger {}
-logger.info { "Launching Employee App"}
-
-
 import kotlin.math.round
 
-val decimal = BigDecimal(3.14159265359).setScale(2, RoundingMode.HALF_EVEN)
+val logger = KotlinLogging.logger {}
+
+
 var employees = EmployeeAPI()
-val firstName = "Joe"
-val Surname = "Soap"
-val gender: Char = 'm'
-val employeeId = 6143
-val grossSalary = 67543.21
-val payePercentage = 38.5
-val prsiPercentage = 5.2
-val annualBonus = 1450.50
-val cycleToWorkScheme = 54.33
-var employee =  Employee("Joe", "Soap", 'm', 6143, 67543.21, 38.5, 5.2, 1450.50, 54.33)
+
 fun roundTwoDecimals(number: Double) = round(number * 100) / 100
 fun main(args: Array<String>) {
+    logger.info { "Launching Employee App" }
     start()
 }
 
@@ -107,5 +96,5 @@ fun add(){
     print("Enter Cycle to Work Deduction: ")
     val cycleToWorkMonthlyDeduction= readLine()!!.toDouble()
 
-    employee = Employee(firstName, surname, gender, employeeID, grossSalary, payePercentage, prsiPercentage, annualBonus, cycleToWorkMonthlyDeduction)
+    employees.create(Employee(firstName, surname, gender, 0, grossSalary, payePercentage, prsiPercentage, annualBonus, cycleToWorkMonthlyDeduction))
 }
