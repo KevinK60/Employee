@@ -19,16 +19,19 @@ fun main(args: Array<String>) {
 fun menu() : Int {
     print(
         """ 
-         |Employee Menu
-         |   1. Add Employee
-         |   2. List All Employees
-         |   3. Search Employees 
-         |   4. Print Payslip for Employee
-         |   5. Delete
-         |   6. List all employee information
-         |  -1. Exit
-         |       
-         |Enter Option : """.trimMargin()
+        
+          ┃━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┃ 
+          ┃         Employee Menu              ┃ 
+          ┃━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┃
+          ┃   1. Add Employee                  ┃ 
+          ┃   2. List All Employees            ┃ 
+          ┃   3. Search Employees              ┃ 
+          ┃   4. Print Payslip for Employee    ┃ 
+          ┃   5. Delete                        ┃ 
+          ┃   6. List all employee information ┃ 
+          ┃  -1. Exit                          ┃ 
+          ┃━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┃ 
+          Enter Option : """.trimMargin()
     )
     return readLine()!!.toInt()
 }
