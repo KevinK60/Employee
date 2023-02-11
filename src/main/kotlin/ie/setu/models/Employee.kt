@@ -1,4 +1,4 @@
-package Employee.models
+package Employee.ie.setu.models
 import Employee.roundTwoDecimals
 
 class Employee(

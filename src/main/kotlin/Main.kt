@@ -1,6 +1,6 @@
 package Employee
-import Employee.models.Employee
-import controllers.EmployeeAPI
+import Employee.ie.setu.models.Employee
+import ie.setu.controllers.EmployeeAPI
 import mu.KotlinLogging
 import kotlin.math.round
 
